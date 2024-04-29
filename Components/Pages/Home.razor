@@ -1,0 +1,20 @@
+﻿@page "/"
+@using BlazorApp1.Model.Entity
+
+<PageTitle>Home</PageTitle>
+
+
+<ToDoComponent TodoItem="item"></ToDoComponent>
+
+@code {
+    public ToDoItem item = new ToDoItem
+
+    {
+       Description = "Finish all projects",
+       DueDate = DateTime.Now,
+       IsCompleted = false,
+       Id = 1
+
+       };
+
+    }

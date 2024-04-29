@@ -1,0 +1,35 @@
+﻿@page "/todo"
+<h3>ToDoList</h3>
+<button class="btn btn-primary" @onclick="OnAddTaskClicked"> Create Task</button>
+@foreach(var t in Items)
+{
+    <ToDoComponent TodoItem="t"></ToDoComponent>
+}
+
+@using BlazorApp1.Model
+
+@code {
+    public List<ToDoItem> Items { get; set; }
+    [Inject] public NavigationManager manager { get; set; }
+
+
+    @using Microsoft.EntityFrameworkCore
+
+    [Inject] public IDbContextFactory <TodoContext> factory { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        var context = factory.CreateDbContext();
+        Items = context.TodoItems.ToList();
+
+    }
+    public void OnAddTaskClicked()
+    {
+
+        manager.NavigateTo("/todo/create");
+    }
+}
+    
+
+
